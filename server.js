@@ -6,7 +6,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 const TELEGRAM_BOT_TOKEN = '8271971002:AAFyqAzhmHIaaNHLMYfXrPDZcxfpg3s3hMI';
-const TELEGRAM_CHAT_ID = '-1002997530688';
+const TELEGRAM_CHAT_IDS = [
+    '-1002997530688'
+];
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -16,17 +18,19 @@ app.use((req, res, next) => {
 
 let alertas = [];
 
-// Función para enviar mensaje a Telegram
-async function enviarTelegram(mensaje) {
-    try {
-        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-        const response = await axios.post(url, {
-            chat_id: TELEGRAM_CHAT_ID,
-            text: mensaje
-        });
-        console.log('Mensaje enviado a Telegram');
-    } catch (error) {
-        console.error('Error enviando a Telegram:', error);
+// Enviar a todos los Chat IDs (en este caso, solo al grupo)
+async function enviarTelegramATodos(mensaje) {
+    for (const chatId of TELEGRAM_CHAT_IDS) {
+        try {
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            await axios.post(url, {
+                chat_id: chatId,
+                text: mensaje
+            });
+            console.log(`Mensaje enviado al grupo: ${chatId}`);
+        } catch (error) {
+            console.error(`Error enviando al grupo:`, error.message);
+        }
     }
 }
 

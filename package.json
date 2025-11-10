@@ -1,0 +1,12 @@
+{
+  "name": "sensor-alertas",
+  "version": "1.0.0",
+  "description": "Servidor para alertas de sensor",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.0"
+  }
+}

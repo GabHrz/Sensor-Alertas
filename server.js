@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 const TELEGRAM_BOT_TOKEN = '8271971002:AAFyqAzhmHIaaNHLMYfXrPDZcxfpg3s3hMI';
-const TELEGRAM_CHAT_ID = '1424398618';
+const TELEGRAM_CHAT_ID = '-1002997530688';
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
